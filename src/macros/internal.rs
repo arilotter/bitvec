@@ -96,7 +96,7 @@ macro_rules! __encode_bits {
 			out = $crate::__encode_bits!($typ as u32 as usize, $ord; $($val),*);
 		}
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			out = $crate::__encode_bits!($typ as u64 as usize, $ord; $($val),*);
 		}

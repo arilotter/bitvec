@@ -24,7 +24,7 @@ fn element(b: &mut Bencher) {
 	b.iter(|| BitSlice::<u32, Msb0>::from_element(&!0));
 	b.iter(|| BitSlice::<u32, Lsb0>::from_element(&!0));
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		b.iter(|| BitSlice::<u64, Msb0>::from_element(&!0));
 		b.iter(|| BitSlice::<u64, Lsb0>::from_element(&!0));
@@ -40,7 +40,7 @@ fn slice(b: &mut Bencher) {
 	b.iter(|| BitSlice::<u32, Msb0>::from_slice(&[0, 1, !0 - 1, !0][..]));
 	b.iter(|| BitSlice::<u32, Lsb0>::from_slice(&[0, 1, !0 - 1, !0][..]));
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		b.iter(|| BitSlice::<u64, Msb0>::from_slice(&[0, 1, !0 - 1, !0][..]));
 		b.iter(|| BitSlice::<u64, Lsb0>::from_slice(&[0, 1, !0 - 1, !0][..]));
@@ -64,7 +64,7 @@ fn len(b: &mut Bencher) {
 	b.iter(|| bsb32.len());
 	b.iter(|| bsl32.len());
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let bsb64 = [0u64; 2].view_bits::<Msb0>();
 		let bsl64 = [0u64; 2].view_bits::<Lsb0>();
@@ -92,7 +92,7 @@ fn index(b: &mut Bencher) {
 	b.iter(|| assert!(!black_box(bsb32)[black_box(69)]));
 	b.iter(|| assert!(!black_box(bsl32)[black_box(69)]));
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let bsb64 = [0u64; 2].view_bits::<Msb0>();
 		let bsl64 = [0u64; 2].view_bits::<Lsb0>();
@@ -127,7 +127,7 @@ fn get_mut(b: &mut Bencher) {
 	let bsl32 = src.view_bits_mut::<Lsb0>();
 	b.iter(|| *bsl32.get_mut(69).unwrap() = true);
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let mut src = [0u64; 2];
 		let bsb64 = src.view_bits_mut::<Msb0>();

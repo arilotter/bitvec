@@ -350,7 +350,7 @@ implementation.
 [@jmmaloney4]: https://github.com/jmmaloney4
 **/
 #[test]
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 fn issue_142() {
 	let a: u64 = 1581109321816487388;
 	assert_eq!(a.view_bits::<Msb0>().chunks(6).nth(10).unwrap(), bits![

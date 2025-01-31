@@ -90,7 +90,7 @@ fn bits_seq_u32(b: &mut Bencher) {
 }
 
 #[bench]
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 fn bits_seq_u64(b: &mut Bencher) {
 	b.iter(|| {
 		bitarr![u64, LocalBits;
@@ -134,7 +134,7 @@ fn bits_rep_u32(b: &mut Bencher) {
 }
 
 #[bench]
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 fn bits_rep_u64(b: &mut Bencher) {
 	b.iter(|| bitarr![u64, LocalBits; 0; 120]);
 	b.iter(|| bitarr![u64, LocalBits; 1; 120]);

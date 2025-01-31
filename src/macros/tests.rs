@@ -121,7 +121,7 @@ fn compile_bitarr() {
 		bitarr![Cell<u32>, crate::order::Lsb0; 1, 0, 1, 1];
 	assert_eq!(cell.into_inner()[0].get(), 13u32);
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let uint: BitArray<[u64; 2], LocalBits> = bitarr![u64, LocalBits; 1; 70];
 		assert_eq!(uint.into_inner(), [!0u64; 2]);
@@ -216,7 +216,7 @@ fn compile_bits() {
 		bits![Cell<usize>, crate::order::Msb0; 1; 100];
 	let _: &BitSlice<usize, Msb0> = bits![usize, crate::order::Msb0; 1; 100];
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let _: &BitSlice<Cell<u64>, Lsb0> = bits![Cell<u64>, Lsb0; 1, 0, 1];
 		let _: &BitSlice<u64, Lsb0> = bits![u64, Lsb0; 1, 0, 1];
@@ -265,7 +265,7 @@ fn compile_bits() {
 			let _: &BitSlice<RadiumUsize, Msb0> = bits![RadiumUsize, Msb0; 1; 100];
 		}
 	}
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	radium::if_atomic! {
 		if atomic(64) {
 			let _: &BitSlice<AtomicU64, LocalBits> = bits![AtomicU64, LocalBits; 0, 1];
@@ -332,7 +332,7 @@ fn compile_bitvec() {
 		bitvec![Cell<usize>, crate::order::Msb0; 1; 100];
 	let _: BitVec<usize, Msb0> = bitvec![usize, crate::order::Msb0; 1; 100];
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let _: BitVec<Cell<u64>, Lsb0> = bitvec![Cell<u64>, Lsb0; 1, 0, 1];
 		let _: BitVec<u64, Lsb0> = bitvec![u64, Lsb0; 1, 0, 1];
@@ -380,7 +380,7 @@ fn compile_bitvec() {
 			let _: BitVec<RadiumUsize, Msb0> =bitvec![RadiumUsize, Msb0; 1; 100];
 		}
 	}
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	radium::if_atomic! {
 		if atomic(64) {
 			let _: BitVec<AtomicU64, LocalBits> =bitvec![AtomicU64, LocalBits; 0, 1];
@@ -447,7 +447,7 @@ fn compile_bitbox() {
 		bitbox![Cell<usize>, crate::order::Msb0; 1; 100];
 	let _: BitBox<usize, Msb0> = bitbox![usize, crate::order::Msb0; 1; 100];
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	{
 		let _: BitBox<Cell<u64>, Lsb0> = bitbox![Cell<u64>, Lsb0; 1, 0, 1];
 		let _: BitBox<u64, Lsb0> = bitbox![u64, Lsb0; 1, 0, 1];
@@ -495,7 +495,7 @@ fn compile_bitbox() {
 			let _: BitBox<RadiumUsize, Msb0> =bitbox![RadiumUsize, Msb0; 1; 100];
 		}
 	}
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	radium::if_atomic! {
 		if atomic(64) {
 			let _: BitBox<AtomicU64, LocalBits> =bitbox![AtomicU64, LocalBits; 0, 1];

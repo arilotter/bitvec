@@ -191,7 +191,7 @@ store! {
 	u32 => BitSafeU32;
 }
 
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 store!(u64 => BitSafeU64);
 
 store!(usize => BitSafeUsize);
@@ -238,7 +238,7 @@ atomic! {
 	32, u32 => AtomicU32;
 }
 
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 atomic!(64, u64 => AtomicU64);
 
 atomic!(size, usize => AtomicUsize);
@@ -281,7 +281,7 @@ mod tests {
 		assert_impl_all!(BitSlice<u32, LocalBits>: Send, Sync);
 		assert_impl_all!(BitSlice<usize, LocalBits>: Send, Sync);
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		assert_impl_all!(BitSlice<u64, LocalBits>: Send, Sync);
 	}
 
@@ -292,7 +292,7 @@ mod tests {
 		assert_not_impl_any!(BitSlice<Cell<u32>, LocalBits>: Send, Sync);
 		assert_not_impl_any!(BitSlice<Cell<usize>, LocalBits>: Send, Sync);
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		assert_not_impl_any!(BitSlice<Cell<u64>, LocalBits>: Send, Sync);
 	}
 
@@ -311,7 +311,7 @@ mod tests {
 		assert_not_impl_any!(BitSlice<BitSafeU32, LocalBits>: Send, Sync);
 		assert_not_impl_any!(BitSlice<BitSafeUsize, LocalBits>: Send, Sync);
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		assert_not_impl_any!(BitSlice<BitSafeU64, LocalBits>: Send, Sync);
 	}
 
@@ -323,7 +323,7 @@ mod tests {
 		assert_impl_all!(BitSlice<AtomicU32, LocalBits>: Send, Sync);
 		assert_impl_all!(BitSlice<AtomicUsize, LocalBits>: Send, Sync);
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		assert_impl_all!(BitSlice<AtomicU64, LocalBits>: Send, Sync);
 	}
 }

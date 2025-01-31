@@ -243,7 +243,7 @@ where O: BitOrder {
 	verify_for_type::<u32, O>(verbose);
 	verify_for_type::<usize, O>(verbose);
 
-	#[cfg(target_pointer_width = "64")]
+	#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 	verify_for_type::<u64, O>(verbose);
 }
 

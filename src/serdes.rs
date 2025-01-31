@@ -142,13 +142,13 @@ mod tests {
 				}
 			}
 		}
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		check_impl! {
 			Lsb0 @ u64, RadiumU64;
 			Msb0 @ u64, RadiumU64;
 			LocalBits @ u64, RadiumU64;
 		}
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		radium::if_atomic!(if atomic(64) {
 			check_impl! {
 				Lsb0 @ AtomicU64;

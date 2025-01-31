@@ -35,7 +35,7 @@ least 64 bits.
 
 This implementation is not present on targets with 32-bit processor words.
 **/
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 impl BitRegister for u64 {
 	const ALL: Self = !0;
 }
@@ -121,7 +121,7 @@ element! {
 	32, u32 => AtomicU32;
 }
 
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 element!(64, u64 => AtomicU64);
 
 element!(size, usize => AtomicUsize);
@@ -149,7 +149,7 @@ mod tests {
 		assert!(aligned_to_size::<BitSafeUsize>());
 		assert!(layout_eq::<usize, BitSafeUsize>());
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			assert!(aligned_to_size::<u64>());
 			assert!(aligned_to_size::<BitSafeU64>());

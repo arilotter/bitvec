@@ -54,7 +54,7 @@ fn verify_u32() {
 
 #[test]
 #[cfg(not(tarpaulin))]
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 fn verify_u64() {
 	verify_for_type::<u64, Swizzle>(cfg!(feature = "verbose"));
 }

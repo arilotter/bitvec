@@ -241,7 +241,7 @@ safe! {
 	u32 => BitSafeU32 => radium::types::RadiumU32;
 }
 
-#[cfg(target_pointer_width = "64")]
+#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 safe!(u64 => BitSafeU64 => radium::types::RadiumU64);
 
 safe!(usize => BitSafeUsize => radium::types::RadiumUsize);

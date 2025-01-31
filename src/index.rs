@@ -1040,7 +1040,7 @@ mod tests {
 		}
 		assert!(BitIdx::<u32>::new(32).is_err());
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			for n in 0 .. 64 {
 				assert!(BitIdx::<u64>::new(n).is_ok());
@@ -1071,7 +1071,7 @@ mod tests {
 		}
 		assert!(BitEnd::<u32>::new(33).is_none());
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			for n in 0 ..= 64 {
 				assert!(BitEnd::<u64>::new(n).is_some());
@@ -1102,7 +1102,7 @@ mod tests {
 		}
 		assert!(BitPos::<u32>::new(32).is_none());
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			for n in 0 .. 64 {
 				assert!(BitPos::<u64>::new(n).is_some());
@@ -1136,7 +1136,7 @@ mod tests {
 		assert!(BitSel::<u32>::new(0).is_none());
 		assert!(BitSel::<u32>::new(3).is_none());
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			for n in 0 .. 64 {
 				assert!(BitSel::<u64>::new(1 << n).is_some());
@@ -1318,7 +1318,7 @@ mod tests {
 			"BitMask<u32>(00000000000000000000000000100101)",
 		);
 
-		#[cfg(target_pointer_width = "64")]
+		#[cfg(any(target_pointer_width = "64", all(target_arch = "wasm32", target_os = "unknown")))]
 		{
 			assert_eq!(
 				format!("{:?}", BitIdx::<u64>::MAX),
